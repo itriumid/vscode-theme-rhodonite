@@ -1,0 +1,8 @@
+# @itrium/palettes lists Svelte as a peer for its components; this repository only imports its
+# colors and contrast check, which don't need Svelte, so don't install it.
+autoInstallPeers: false
+
+# Install scripts stay off until someone decides otherwise. vsce-sign's downloads the signing tool
+# for publishing to the Visual Studio Marketplace; packaging a .vsix doesn't use it.
+allowBuilds:
+  "@vscode/vsce-sign": false

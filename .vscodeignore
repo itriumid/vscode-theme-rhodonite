@@ -1,0 +1,7 @@
+# Only the manifest, the theme files, the icon, the README and the license go in the package.
+**
+!package.json
+!themes/*.json
+!icon.png
+!README.md
+!LICENSE
