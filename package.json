@@ -48,6 +48,7 @@
   },
   "devDependencies": {
     "@itrium/palettes": "0.2.0",
-    "@vscode/vsce": "4.0.0"
+    "@vscode/vsce": "4.0.0",
+    "ovsx": "1.2.0"
   }
 }
