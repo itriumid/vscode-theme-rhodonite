@@ -6,3 +6,9 @@ autoInstallPeers: false
 # for publishing to the Visual Studio Marketplace; packaging a .vsix doesn't use it.
 allowBuilds:
   "@vscode/vsce-sign": false
+
+# pnpm refuses packages younger than its minimum release age. Our own palettes package is
+# excepted at the exact version we pin, right after we publish it from its release workflow
+# (with provenance), so the theme can update the same day. Replace the version on each update.
+minimumReleaseAgeExclude:
+  - "@itrium/palettes@0.2.0"

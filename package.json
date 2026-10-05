@@ -47,7 +47,7 @@
     "package": "pnpm test && mkdir -p dist && vsce package --no-dependencies --out dist/"
   },
   "devDependencies": {
-    "@itrium/palettes": "0.1.0",
+    "@itrium/palettes": "0.2.0",
     "@vscode/vsce": "4.0.0"
   }
 }
