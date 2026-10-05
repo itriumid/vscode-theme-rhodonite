@@ -57,8 +57,8 @@ reopened — and skip it otherwise.
 the editors built on it: **Rhodonite** (dark) and **Rhodonite Light**. No code runs in the
 editor; the extension is two JSON theme files, generated.
 
-- **`themes/` is generated; `source/` is the truth.** `source/colors.mjs` reads the interface
-  colors from `@itrium/palettes` and holds the syntax and terminal colors, `source/theme.mjs`
+- **`themes/` is generated; `source/` is the truth.** `source/colors.mjs` reads every color
+  from `@itrium/palettes` (its stylesheet and `CODE_COLORS`), `source/theme.mjs`
   decides where each color goes, `scripts/build.mjs` writes the files. The generated files are
   committed because the editor reads them as they are; a test fails when they're stale.
 - **Every color passes level AA** (`.handbook/conventions/reference/brand.md`): `source/check.mjs`
@@ -67,8 +67,10 @@ editor; the extension is two JSON theme files, generated.
   the color. A new interface color with text on it gets a pairing.
 - **The checker has to fail what it should.** `tests/contrast.test.mjs` feeds it broken themes;
   a change to the checker keeps those tests failing the broken input.
-- **The syntax and terminal colors match the Rhodonite terminal themes** (Ghostty and the shell
-  prompt), so code reads the same in the editor and a shell. Change them together.
+- **No hex colors of our own in `source/colors.mjs`.** A color that's wrong is changed in
+  `@itrium/palettes`, which checks it too, and arrives here by updating the pinned version.
+  Hex values in `source/theme.mjs` are limited to hover shades, shadows and transparent
+  placeholders.
 - **Pink means focus, the active item and the primary action.** Don't add it as decoration;
   light mode never uses pastel pink as text or as a line.
 

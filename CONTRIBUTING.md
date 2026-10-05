@@ -16,12 +16,11 @@ pnpm install
 
 ## Changing a color
 
-Colors live in `source/`, never in `themes/`, which `pnpm build` overwrites:
+Never edit `themes/`, which `pnpm build` overwrites.
 
-- **Interface colors** (backgrounds, text, the accent) come from `@itrium/palettes`. Change
-  them there, release that package, then update the pinned version here.
-- **Syntax and terminal colors** are in `source/colors.mjs`. They match the Rhodonite terminal
-  themes; change both together.
+- **The colors themselves** come from `@itrium/palettes`: the interface colors from its
+  stylesheet, the syntax and terminal colors from its `CODE_COLORS`. Change them there, release
+  that package, then update the pinned version here.
 - **Which color goes where** is in `source/theme.mjs`.
 
 Then run `pnpm build` and `pnpm test`, and commit the rebuilt files in `themes/` with the change.

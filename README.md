@@ -35,9 +35,10 @@ selection, a selected row, a menu, a button), and 3:1 for the cursor, focus outl
 lines that mark what's active. A test checks every pairing before anything is released, and the
 test has tests of its own, with deliberately broken themes, so it can't quietly pass everything.
 
-The interface colors come from [`@itrium/palettes`](https://github.com/itriumid/palettes), the
-same palette Itrium's free applications use, and that package's contrast formula does the
-checking.
+Every color comes from [`@itrium/palettes`](https://github.com/itriumid/palettes): the interface
+colors are the same palette Itrium's free applications use, and the syntax and terminal colors
+are Rhodonite's code colors, which that package checks too. Its contrast formula does the
+checking here.
 
 ## Installing
 
