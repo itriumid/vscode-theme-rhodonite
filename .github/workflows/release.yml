@@ -2,7 +2,7 @@ name: Release
 
 # Pushing a `v*` tag publishes that version to Open VSX, after the same checks every pull request
 # runs, and attaches the .vsix to a GitHub release. The Open VSX token is the OVSX_TOKEN
-# repository secret, given only to the publish step. See CONTRIBUTING.md, Releasing.
+# repository secret, given only to the steps that talk to Open VSX. See CONTRIBUTING.md, Releasing.
 on:
   push:
     tags: ['v*']
@@ -51,6 +51,20 @@ jobs:
       # Tests the committed theme files as they are, then packages dist/rhodonite-<version>.vsix.
       - name: Check every color and package the extension
         run: pnpm package
+
+      # The namespace is `publisher` in package.json. Open VSX only creates one through its API, so
+      # the first release creates it with the same token; after that this step does nothing.
+      - name: Create the Open VSX namespace if it doesn't exist
+        env:
+          OVSX_PAT: ${{ secrets.OVSX_TOKEN }}
+        run: |
+          publisher=$(jq -r .publisher package.json)
+          status=$(curl --silent --output /dev/null --write-out '%{http_code}' "https://open-vsx.org/api/$publisher")
+          case "$status" in
+            200) echo "Namespace $publisher exists." ;;
+            404) pnpm exec ovsx create-namespace "$publisher" ;;
+            *) echo "::error::Open VSX answered $status for namespace $publisher"; exit 1 ;;
+          esac
 
       # --skip-duplicate leaves a version that's already on Open VSX alone, so a release can be
       # run again safely.
