@@ -58,5 +58,6 @@ as they are and packages the extension.
    that's already on Open VSX is skipped, so a failed release can be run again.
 
 Publishing uses an Open VSX access token, stored as the `OVSX_TOKEN` repository secret and given
-only to the publish step. Tokens don't expire on their own; when one is replaced, update the
+only to the steps that talk to Open VSX. The first release also creates the `itrium` namespace
+(`publisher` in `package.json`) when it doesn't exist. Tokens don't expire on their own; when one is replaced, update the
 secret with `gh secret set OVSX_TOKEN`.
