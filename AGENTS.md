@@ -53,13 +53,33 @@ reopened — and skip it otherwise.
 
 ## This repository
 
-<!--
-  Repository-specific instructions go here and are owned by this repository. Nothing syncs
-  this file back to the handbook, so edit freely. Good things to put here:
-    - what this project is, and its stack
-    - build, test and lint commands, and which of them to run before calling a change done
-    - known gotchas specific to this codebase
-  Anything that would apply to every repository belongs in the handbook instead.
--->
+`vscode-theme-rhodonite`, Itrium's Rhodonite palette as a color theme for Visual Studio Code and
+the editors built on it: **Rhodonite** (dark) and **Rhodonite Light**. No code runs in the
+editor; the extension is two JSON theme files, generated.
 
-_To be filled in._
+- **`themes/` is generated; `source/` is the truth.** `source/colors.mjs` reads the interface
+  colors from `@itrium/palettes` and holds the syntax and terminal colors, `source/theme.mjs`
+  decides where each color goes, `scripts/build.mjs` writes the files. The generated files are
+  committed because the editor reads them as they are; a test fails when they're stale.
+- **Every color passes level AA** (`.handbook/conventions/reference/brand.md`): `source/check.mjs`
+  pairs every text color with every surface it sits on, plus the cursor, focus outlines and
+  active lines at 3:1. Never weaken a threshold or drop a pairing to make a color pass; change
+  the color. A new interface color with text on it gets a pairing.
+- **The checker has to fail what it should.** `tests/contrast.test.mjs` feeds it broken themes;
+  a change to the checker keeps those tests failing the broken input.
+- **The syntax and terminal colors match the Rhodonite terminal themes** (Ghostty and the shell
+  prompt), so code reads the same in the editor and a shell. Change them together.
+- **Pink means focus, the active item and the primary action.** Don't add it as decoration;
+  light mode never uses pastel pink as text or as a line.
+
+### Commands
+
+| What | Command |
+| --- | --- |
+| Install | `pnpm install` |
+| Write `themes/` from `source/` | `pnpm build` |
+| Check the committed themes | `pnpm test` |
+| Check, then package `dist/*.vsix` | `pnpm package` |
+
+Before calling a change done, run `pnpm build`, then `pnpm package` (which runs the tests), and
+look at it installed in the editor, dark and light.
