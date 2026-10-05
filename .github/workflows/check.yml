@@ -1,0 +1,44 @@
+name: Check
+
+# Every pull request and every push to main: the theme files match the source, and every color
+# meets level AA (`Test`, a required check once the repository is configured), then package the
+# extension so a broken manifest fails here rather than at release.
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+# A newer push to the same pull request makes the older run pointless.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+# Any `permissions:` block replaces the default token scopes, so grant per job.
+permissions: {}
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: pnpm/action-setup@ea17c68df8912ef543352723c149a84f56e3d413 # v6.1.0
+        with:
+          version: 12
+          cache: true
+
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: 24
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      # Tests the committed theme files as they are, without rebuilding, so a change to source/
+      # that wasn't rebuilt fails here. Then packages the .vsix.
+      - name: Check every color and package the extension
+        run: pnpm package

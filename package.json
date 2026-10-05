@@ -1,0 +1,53 @@
+{
+  "name": "rhodonite",
+  "displayName": "Rhodonite Theme",
+  "description": "Itrium's Rhodonite palette for the editor: graphite with pink running through it, in light and dark, every color at level AA",
+  "version": "0.1.0",
+  "publisher": "itrium",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "icon": "icon.png",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/itriumid/vscode-theme-rhodonite.git"
+  },
+  "homepage": "https://github.com/itriumid/vscode-theme-rhodonite#readme",
+  "categories": [
+    "Themes"
+  ],
+  "keywords": [
+    "theme",
+    "dark",
+    "light",
+    "pink",
+    "graphite",
+    "accessible"
+  ],
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "contributes": {
+    "themes": [
+      {
+        "label": "Rhodonite",
+        "uiTheme": "vs-dark",
+        "path": "./themes/rhodonite-color-theme.json"
+      },
+      {
+        "label": "Rhodonite Light",
+        "uiTheme": "vs",
+        "path": "./themes/rhodonite-light-color-theme.json"
+      }
+    ]
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node --test \"tests/*.test.mjs\"",
+    "package": "pnpm test && mkdir -p dist && vsce package --no-dependencies --out dist/"
+  },
+  "devDependencies": {
+    "@itrium/palettes": "0.1.0",
+    "@vscode/vsce": "4.0.0"
+  }
+}
