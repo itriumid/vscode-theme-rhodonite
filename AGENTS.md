@@ -82,6 +82,7 @@ editor; the extension is two JSON theme files, generated.
 | Write `themes/` from `source/` | `pnpm build` |
 | Check the committed themes | `pnpm test` |
 | Check, then package `dist/*.vsix` | `pnpm package` |
+| Release (a `v*` tag publishes to Open VSX) | `CONTRIBUTING.md`, Releasing |
 
 Before calling a change done, run `pnpm build`, then `pnpm package` (which runs the tests), and
 look at it installed in the editor, dark and light.

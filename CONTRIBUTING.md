@@ -42,3 +42,21 @@ as they are and packages the extension.
 
 - **Patch:** a color adjusted, or a scope added.
 - **Minor:** a new theme, or a change in where a color is used that people will notice.
+
+## Releasing
+
+1. Set the version in `package.json` in a pull request, and merge it.
+2. Tag the merge commit and push the tag:
+
+   ```sh
+   git tag -a v0.2.0 -m "Rhodonite Theme 0.2.0"
+   git push origin v0.2.0
+   ```
+
+3. `release.yml` checks the tag matches `package.json`, runs the checks again, packages the
+   extension, publishes it to Open VSX, and attaches the `.vsix` to a GitHub release. A version
+   that's already on Open VSX is skipped, so a failed release can be run again.
+
+Publishing uses an Open VSX access token, stored as the `OVSX_TOKEN` repository secret and given
+only to the publish step. Tokens don't expire on their own; when one is replaced, update the
+secret with `gh secret set OVSX_TOKEN`.
