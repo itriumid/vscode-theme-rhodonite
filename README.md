@@ -42,17 +42,24 @@ checking here.
 
 ## Installing
 
-From [Open VSX](https://open-vsx.org/extension/itrium/rhodonite), the registry Cursor, VSCodium,
-Antigravity and other editors built on Visual Studio Code use: search for **Rhodonite** in the
-Extensions view, or
+**Cursor, VSCodium, Windsurf, Antigravity and other editors that use
+[Open VSX](https://open-vsx.org/extension/itrium/rhodonite):** search for **Rhodonite** in the
+Extensions view, or run
 
 ```sh
 code --install-extension itrium.rhodonite
 ```
 
-with your editor's command in place of `code`. Each version's `.vsix` is also attached to its
-[GitHub release](https://github.com/itriumid/vscode-theme-rhodonite/releases), for installing by
-hand.
+with your editor's own command in place of `code`.
+
+**Visual Studio Code** installs from Microsoft's marketplace, and the theme isn't there yet, so
+the command above can't find it. Download the `.vsix` from the
+[latest release](https://github.com/itriumid/vscode-theme-rhodonite/releases/latest) and install
+the file, with its version in the name:
+
+```sh
+code --install-extension rhodonite-<version>.vsix
+```
 
 Then choose **Rhodonite** or **Rhodonite Light** under *Preferences: Color Theme*. To follow the
 system's light and dark setting, add this to your settings:
