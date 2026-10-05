@@ -3,9 +3,12 @@
 autoInstallPeers: false
 
 # Install scripts stay off until someone decides otherwise. vsce-sign's downloads the signing tool
-# for publishing to the Visual Studio Marketplace; packaging a .vsix doesn't use it.
+# for publishing to the Visual Studio Marketplace; packaging a .vsix doesn't use it. keytar's
+# builds a native module for keeping tokens in the system keychain; the release workflow passes
+# the Open VSX token in an environment variable instead.
 allowBuilds:
   "@vscode/vsce-sign": false
+  keytar: false
 
 # pnpm refuses packages younger than its minimum release age. Our own palettes package is
 # excepted at the exact version we pin, right after we publish it from its release workflow
