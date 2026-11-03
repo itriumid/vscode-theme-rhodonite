@@ -83,3 +83,16 @@ jobs:
           else
             gh release create "$TAG" dist/*.vsix --title "Rhodonite Theme ${TAG#v}" --generate-notes --verify-tag
           fi
+
+  # After Open VSX and the GitHub release, so the post only goes out for a version people can
+  # install. Re-running the release posts it again.
+  announce:
+    name: Announce on Discord
+    needs: publish
+    permissions:
+      contents: read
+    uses: ./.github/workflows/announce-release.yml
+    with:
+      tag: ${{ github.ref_name }}
+    secrets:
+      DISCORD_RELEASES_WEBHOOK: ${{ secrets.DISCORD_RELEASES_WEBHOOK }}
