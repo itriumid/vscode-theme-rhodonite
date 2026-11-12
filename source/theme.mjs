@@ -1,5 +1,5 @@
 // Builds a color theme from the colors in colors.mjs. The brand rules shape it
-// (.handbook/conventions/reference/brand.md):
+// (.handbook/itrium/brand.md):
 //
 // - Pink means focus, the active item and the primary action: the cursor, the active tab's top
 //   line, focus outlines, buttons and badges. Everything else is graphite and gray.
